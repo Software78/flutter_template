@@ -1,6 +1,26 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'core/utils/bloc_observer.dart';
+
+final ValueNotifier<bool> darkTheme = ValueNotifier<bool>(
+    SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+        Brightness.dark);
 
 void main() {
+  SchedulerBinding.instance.platformDispatcher.onPlatformBrightnessChanged =
+      () {
+    darkTheme.value =
+        SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+            Brightness.dark;
+  };
+  if (!kDebugMode) {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    Bloc.observer = AppBlocObserver();
+  }
   runApp(const MyApp());
 }
 
