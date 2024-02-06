@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_template/core/navigation/navigator.dart';
 
 import 'core/navigation/routes.dart';
 
@@ -31,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    context.navigator.go('');
     setState(() {
       _counter++;
     });
