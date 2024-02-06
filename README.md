@@ -37,3 +37,14 @@ context.navigator.pop()
 the navigation service currently works with gorouter and allows passing objects through the `extra` property, it also has `queryParameters` and `pathParameters`
 
 all methods except `go` and `goNamed` are futures that allows value to be returned to the previous screen
+
+the navigation service can also work with other navigation methods provided the abstraction is properly implemented 
+## CryptoSystem
+The abstract class handles encryption and decryption 
+
+simply provide the encryption key using `buildVariables.encKey` and `buildVariables.encVector` and call the extension method built on `String`
+
+```
+"some text".encrypt()
+"some text".decrypt()
+```

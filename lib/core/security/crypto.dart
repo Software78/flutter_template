@@ -1,4 +1,5 @@
 import 'package:encrypt/encrypt.dart' as crypt;
+import 'package:get_it/get_it.dart';
 
 abstract class CryptoSystem {
   String encrypt(String data);
@@ -30,5 +31,17 @@ class AESCryptoSystem implements CryptoSystem {
         crypt.Encrypter(crypt.AES(deckey, mode: crypt.AESMode.cbc));
     final crypt.IV deciv = crypt.IV.fromUtf8(vector);
     return input == null ? "" : decrypter.decrypt64(input, iv: deciv);
+  }
+}
+
+extension CryptoExtension on String {
+  String encrypt() {
+    final cryptoSystem = GetIt.I.get<CryptoSystem>();
+    return cryptoSystem.encrypt(this);
+  }
+
+  String decrypt() {
+    final cryptoSystem = GetIt.I.get<CryptoSystem>();
+    return cryptoSystem.decrypt(this);
   }
 }
