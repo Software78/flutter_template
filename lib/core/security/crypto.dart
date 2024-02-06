@@ -1,11 +1,11 @@
 import 'package:encrypt/encrypt.dart' as crypt;
 
-abstract class ICryptoSystem {
+abstract class CryptoSystem {
   String encrypt(String data);
   String decrypt(String data);
 }
 
-class AESCryptoSystem implements ICryptoSystem {
+class AESCryptoSystem implements CryptoSystem {
   final String key;
   final String vector;
 

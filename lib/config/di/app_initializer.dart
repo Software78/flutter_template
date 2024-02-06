@@ -51,7 +51,7 @@ class AppInitializer {
   }
 
   void initializeSecurity() {
-    instanceLocator.registerSingleton<ICryptoSystem>(
+    instanceLocator.registerSingleton<CryptoSystem>(
       AESCryptoSystem(
         key: buildVariables.encKey,
         vector: buildVariables.encVector,

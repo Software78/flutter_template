@@ -1,16 +1,22 @@
-# flutter_project_template
 
-A new Flutter project.
+# Flutter Project Template
 
-## Getting Started
+An example template for afex flutter projects
 
-This project is a starting point for a Flutter application.
+## Environment Variables
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+To run this project, you will need to add the following environment variables to your .env file
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+`BASE_URL`
+`ENC_KEY`
+`ENC_VECTOR`
+
+
+## Registered Services
+
+- NavigationService
+- CryptoSystem
+- StorageClient
+- EncryptedStorageClient
+- DatabaseStorage
