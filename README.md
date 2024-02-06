@@ -48,3 +48,18 @@ simply provide the encryption key using `buildVariables.encKey` and `buildVariab
 "some text".encrypt()
 "some text".decrypt()
 ```
+## StorageClient
+The StorageClient class is an interface meant to work directly with sharedPreferences and it has 3 methods
+
+- read<T>
+- write<T>
+- delete
+- deleteAll
+
+the implemented class is `PrefsStorageImpl`
+
+```dart
+final prefs = PrefsStorageImpl();
+final someValue = await prefs.read<String>('some-key');
+await prefs.write<int>('some-key', 12);
+```
