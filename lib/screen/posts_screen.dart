@@ -13,7 +13,7 @@ class PostScreen extends StatefulWidget {
 
 class PostsState extends State<PostScreen> {
   Future<List<Post>> getPosts() async {
-    dio_http.Response response = await dio().get(
+    dio_http.Response response = await dio.get(
       '/user/posts',
     );
     List posts = json.decode(response.toString());

@@ -18,19 +18,19 @@ class Auth extends ChangeNotifier {
 
   Future login({required Map credentials}) async {
     String deviceId = await getDeviceId();
-    dio_http.Response response = await dio().post(
+    dio_http.Response response = await dio.post(
       '/auth/token',
       data: json.encode(credentials..addAll({'deviceId': deviceId})),
     );
     String token = json.decode(response.toString())['token'];
-    await attempt(token);
+    dio.options.headers['Authorization'] = 'Bearer $token';
     storetoken(token);
   }
 
   Future attempt(String token) async {
     try {
       debugPrint('Token $token');
-      dio_http.Response response = await dio().get('/auth/user',
+      dio_http.Response response = await dio.get('/auth/user',
           options: dio_http.Options(
             headers: {
               'Authorization': 'Bearer $token',
