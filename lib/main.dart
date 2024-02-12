@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_template/config/di/app_initializer.dart';
 import 'package:flutter_project_template/core/navigation/navigator.dart';
 
 import 'core/navigation/routes.dart';
 
 void main() {
+  AppInitializer.create();
   runApp(const MyApp());
 }
 

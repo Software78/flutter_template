@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project_template/core/storage/shared_prefs_impl.dart';
 import 'package:flutter_project_template/features/auth/repository/repository.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,17 +27,19 @@ class AppInitializer {
     instanceLocator.reset();
   }
 
-  Future<void> create() async {
+ static Future<void> create() async {
     instanceLocator = GetIt.instance;
     Bloc.observer = AppBlocObserver();
+    WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    await dotenv.load(fileName: '.env');
     await ScreenUtil.ensureScreenSize();
     await EasyLocalization.ensureInitialized();
     BuildVariables.init();
     initialize();
   }
 
-  void initialize() {
+ static void initialize() {
     initializeSecurity();
     initializeNavigator();
     initializeLocalDataSources();
@@ -44,13 +47,13 @@ class AppInitializer {
     initBlocs();
   }
 
-  void initializeNavigator() {
+static  void initializeNavigator() {
     instanceLocator.registerLazySingleton<NavigationService>(
       () => GoRouterNavigatorImpl(navigatorKey),
     );
   }
 
-  void initializeSecurity() {
+ static void initializeSecurity() {
     instanceLocator.registerSingleton<CryptoSystem>(
       AESCryptoSystem(
         key: buildVariables.encKey,
@@ -59,7 +62,7 @@ class AppInitializer {
     );
   }
 
-  void initializeLocalDataSources() {
+ static void initializeLocalDataSources() {
     instanceLocator.registerLazySingleton<StorageClient>(
       () => PrefsStorageImpl(),
     );
@@ -74,14 +77,14 @@ class AppInitializer {
     );
   }
 
-  void initBlocs() {
+ static void initBlocs() {
     // instanceLocator.registerFactory<ExampleBloc>(() => ExampleBloc());
   }
 
-  void initRepos() {
+ static void initRepos() {
     instanceLocator
         .registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl());
   }
 
-  void initializeRemoteDataSources() {}
+ static void initializeRemoteDataSources() {}
 }

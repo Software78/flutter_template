@@ -9,6 +9,7 @@ import '../../main.dart';
 
 GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
+  observers: [],
   routes: [
     GoRoute(
       path: MyHomePage.routeName,

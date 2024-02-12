@@ -17,9 +17,9 @@ class BuildVariables {
 
   static void init() {
     _buildVariables = BuildVariables._init(
-      baseUrl: dotenv.env['BASE_URL']!,
-      encKey: dotenv.env['ENC_KEY']!,
-      encVector: dotenv.env['ENC_VECTOR']!,
+      baseUrl: dotenv.env['BASE_URL'] ?? '',
+      encKey: dotenv.env['ENC_KEY'] ?? '',
+      encVector: dotenv.env['ENC_VECTOR'] ?? '',
     );
   }
 }
