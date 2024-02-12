@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart' as dio_http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,9 +24,12 @@ class Auth extends ChangeNotifier {
       '/auth/token',
       data: json.encode(credentials..addAll({'deviceId': deviceId})),
     );
-    String token = json.decode(response.toString())['token'];
-    dio.options.headers['Authorization'] = 'Bearer $token';
-    storetoken(token);
+    log('Response: ${response.data}');
+
+    var token = json.decode(response.data)['token'];
+    storetoken(token.toString());
+    _authenticated = true;
+    notifyListeners();
   }
 
   Future attempt(String token) async {
