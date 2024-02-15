@@ -63,3 +63,5 @@ final prefs = PrefsStorageImpl();
 final someValue = await prefs.read<String>('some-key');
 await prefs.write<int>('some-key', 12);
 ```
+
+## TO BE CONTINUED
