@@ -25,14 +25,27 @@ class IsarStorageClient implements DatabaseStorage {
   }
 
   @override
-  Future<T> readFromDb<T>() {
-    // TODO: implement readFromDb
-    throw UnimplementedError();
+  Future<List<T>> readFromDb<T>() async {
+    final collection = _isar.collection<T, T>();
+    return collection.where().findAll();
   }
 
   @override
-  Future<void> writeToDb<T>(T value) {
-    // TODO: implement writeToDb
-    throw UnimplementedError();
+  Future<void> writeToDb<T>(T value) async {
+    final collection = _isar.collection<T, T>();
+    return collection.put(value);
   }
+
+  @override
+  Future<void> writeListToDb<T>(List<T> value) async {
+    final collection = _isar.collection<T, T>();
+    return collection.putAll(value);
+  }
+
+  // @override
+  // Future<List<T>> queryDataWithParams<T>(IsarQuery<T> query) async {
+  //   final collection = _isar.collection<T, T>();
+  //   return collection.where().f
+        
+  // }
 }
