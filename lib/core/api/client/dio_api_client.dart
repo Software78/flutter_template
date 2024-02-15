@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_project_template/core/api/response/api_response.dart';
 
 import '../../../config/flavor/build_variables.dart';
+import '../response/api_response.dart';
 import 'api_client.dart';
 
 class DioApiClient implements ApiClient {

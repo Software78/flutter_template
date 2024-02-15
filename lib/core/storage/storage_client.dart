@@ -15,6 +15,8 @@ abstract class EncryptedStorageClient {
 abstract class DatabaseStorage {
   void openDb();
   void closeDb();
+  Future<T> readFromDb<T>();
+  Future<void> writeToDb<T>(T value);
 }
 
 abstract class LocalStorage

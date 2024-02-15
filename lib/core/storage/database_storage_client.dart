@@ -23,4 +23,16 @@ class IsarStorageClient implements DatabaseStorage {
   void closeDb() {
     _isar.close();
   }
+
+  @override
+  Future<T> readFromDb<T>() {
+    // TODO: implement readFromDb
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> writeToDb<T>(T value) {
+    // TODO: implement writeToDb
+    throw UnimplementedError();
+  }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter_project_template/core/api/response/api_response.dart';
+import '../response/api_response.dart';
 
 abstract class ApiClient {
   void setToken(String token);
