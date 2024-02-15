@@ -16,18 +16,18 @@ import '../../core/storage/storage_client.dart';
 import '../../core/utils/observers.dart';
 import '../flavor/build_variables.dart';
 
- GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppInitializer {
   static late GetIt instanceLocator;
-  
+
   AppInitializer._();
 
   void close() {
     instanceLocator.reset();
   }
 
- static Future<void> create() async {
+  static Future<void> create() async {
     instanceLocator = GetIt.instance;
     Bloc.observer = AppBlocObserver();
     WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +39,7 @@ class AppInitializer {
     initialize();
   }
 
- static void initialize() {
+  static void initialize() {
     initializeSecurity();
     initializeNavigator();
     initializeLocalDataSources();
@@ -47,13 +47,13 @@ class AppInitializer {
     initBlocs();
   }
 
-static  void initializeNavigator() {
+  static void initializeNavigator() {
     instanceLocator.registerLazySingleton<NavigationService>(
       () => GoRouterNavigatorImpl(navigatorKey),
     );
   }
 
- static void initializeSecurity() {
+  static void initializeSecurity() {
     instanceLocator.registerSingleton<CryptoSystem>(
       AESCryptoSystem(
         key: buildVariables.encKey,
@@ -62,7 +62,7 @@ static  void initializeNavigator() {
     );
   }
 
- static void initializeLocalDataSources() {
+  static void initializeLocalDataSources() {
     instanceLocator.registerLazySingleton<StorageClient>(
       () => PrefsStorageImpl(),
     );
@@ -71,20 +71,28 @@ static  void initializeNavigator() {
     );
     instanceLocator.registerLazySingleton<DatabaseStorage>(
       () => IsarStorageClient(
+        //TODO: add directory here and schemas
         directory: 'isar',
         schemas: [],
       ),
     );
+    instanceLocator.registerLazySingleton<LocalStorage>(
+      () => LocalStoragImpl(
+        storageClient: instanceLocator.get<StorageClient>(),
+        encryptedStorageClient: instanceLocator.get<EncryptedStorageClient>(),
+        databaseStorage: instanceLocator.get<DatabaseStorage>(),
+      ),
+    );
   }
 
- static void initBlocs() {
+  static void initBlocs() {
     // instanceLocator.registerFactory<ExampleBloc>(() => ExampleBloc());
   }
 
- static void initRepos() {
+  static void initRepos() {
     instanceLocator
         .registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl());
   }
 
- static void initializeRemoteDataSources() {}
+  static void initializeRemoteDataSources() {}
 }

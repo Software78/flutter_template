@@ -21,5 +21,16 @@ abstract class DatabaseStorage {
   // Future<List<T>> queryDataWithParams<T>(dynamic query);
 }
 
-abstract class LocalStorage
-    implements StorageClient, EncryptedStorageClient, DatabaseStorage {}
+abstract class LocalStorage {}
+
+class LocalStoragImpl implements LocalStorage {
+  final StorageClient storageClient;
+  final EncryptedStorageClient encryptedStorageClient;
+  final DatabaseStorage databaseStorage;
+
+  LocalStoragImpl({
+    required this.storageClient,
+    required this.encryptedStorageClient,
+    required this.databaseStorage,
+  });
+}
