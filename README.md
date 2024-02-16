@@ -1,7 +1,7 @@
 
 # Flutter Project Template
 
-An example template for afex flutter projects
+An example template for my flutter projects
 
 ## Environment Variables
 
@@ -21,6 +21,7 @@ To run this project, you will need to add the following environment variables to
 - EncryptedStorageClient
 - DatabaseStorage
 - ApiClient
+
 ## Navigation Service
 
 To use the navigation service, an extension has been created on `BuildContext` with the methods below
@@ -39,6 +40,7 @@ the navigation service currently works with gorouter and allows passing objects 
 all methods except `go` and `goNamed` are futures that allows value to be returned to the previous screen
 
 the navigation service can also work with other navigation methods provided the abstraction is properly implemented 
+
 ## CryptoSystem
 The abstract class handles encryption and decryption 
 
